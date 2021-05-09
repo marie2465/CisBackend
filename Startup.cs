@@ -26,7 +26,10 @@ namespace Cis_part2
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            string dbHost = Configuration["DB_HOST"] ?? "localhost";
+            string dbUser = Configuration["DB_USER"] ?? "u1374662_mary";
+            string dbPassword = Configuration["DB_PASSwORD"] ?? "3Nuuiwirff";
+            
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
