@@ -6,7 +6,7 @@ namespace Cis_part2.Data
     public class CisDBContext : DbContext
     {
         public CisDBContext(DbContextOptions<CisDBContext> options) : base(options) { }
-        DbSet<Roles> Roles { get; set; }
-        DbSet<User> Users { get; set; }
+        public DbSet<Roles> Roles { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }
