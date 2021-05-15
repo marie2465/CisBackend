@@ -34,6 +34,44 @@ namespace Cis_part2.Migrations
                     b.ToTable("Roles");
                 });
 
+            modelBuilder.Entity("Cis_part2.Models.Skills", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CodeSkills")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NameSkills")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("TypeSkillsId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TypeSkillsId");
+
+                    b.ToTable("Skills");
+                });
+
+            modelBuilder.Entity("Cis_part2.Models.TypeSkills", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("TypeName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TypeSkills");
+                });
+
             modelBuilder.Entity("Cis_part2.Models.User", b =>
                 {
                     b.Property<int>("Id")
@@ -50,9 +88,6 @@ namespace Cis_part2.Migrations
                     b.Property<byte[]>("PasswordSalt")
                         .HasColumnType("varbinary(max)");
 
-                    b.Property<int>("RoleId")
-                        .HasColumnType("int");
-
                     b.Property<int?>("RolesId")
                         .HasColumnType("int");
 
@@ -64,6 +99,15 @@ namespace Cis_part2.Migrations
                     b.HasIndex("RolesId");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("Cis_part2.Models.Skills", b =>
+                {
+                    b.HasOne("Cis_part2.Models.TypeSkills", "TypeSkills")
+                        .WithMany()
+                        .HasForeignKey("TypeSkillsId");
+
+                    b.Navigation("TypeSkills");
                 });
 
             modelBuilder.Entity("Cis_part2.Models.User", b =>

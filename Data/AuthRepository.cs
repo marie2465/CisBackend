@@ -1,8 +1,15 @@
 using System;
+using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
+using Cis_part2.Dtos.Users;
 using Cis_part2.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Cis_part2.Data
 {
@@ -11,12 +18,14 @@ namespace Cis_part2.Data
         string passSalts;
         private readonly IConfiguration _configuration;
         private readonly CisDBContext db;
-        public AuthRepository(CisDBContext context, IConfiguration configuration)
+        private readonly IMapper _mapper;
+        public AuthRepository(CisDBContext context, IConfiguration configuration, IMapper mapper)
         {
             db = context;
             _configuration = configuration;
+            _mapper = mapper;
         }
-        private void CreatePasswordHash(string password, out byte[] passwordHash,out byte[] passSalt)
+        private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passSalt)
         {
             using (var hmac = new System.Security.Cryptography.HMACSHA512())
             {
@@ -58,7 +67,7 @@ namespace Cis_part2.Data
                 }
                 else
                 {
-                    services.Data = user.Login + "\t" + user.PasswordSalt;
+                    services.Data = CreateToken(user);
                 }
             }
             catch (Exception e)
@@ -74,133 +83,11 @@ namespace Cis_part2.Data
             ServicesResponse<string> services = new ServicesResponse<string>();
             try
             {
-                //добавление пользователя
-                if (await UserExists(user.Login))
-                {
-                    services.Success = false;
-                    services.Message = "User alredy exists";
-                }
-                //ничего в запросе не введено
-                else if (user.UserName == null && user.Login == null && password == null && user.RoleId == 0)
+                if(user ==null)
                 {
                     services.Success = false;
                     services.Message = "Введите данные";
                 }
-                //проверка на отсутствующее поле
-                else if (user.UserName != null && user.Login == null && password == null && user.RoleId == 0)
-                {
-                    services.Success = false;
-                    services.Message = "Введите данные";
-                }
-                else if (user.UserName == null && user.Login != null && password == null && user.RoleId == 0)
-                {
-                    services.Success = false;
-                    services.Message = "Введите данные";
-                }
-                else if (user.UserName == null && user.Login == null && password != null && user.RoleId == 0)
-                {
-                    services.Success = false;
-                    services.Message = "Введите данные";
-                }
-                else if (user.UserName == null && user.Login == null && password == null && user.RoleId != 0)
-                {
-                    services.Success = false;
-                    services.Message = "Введите данные";
-                }
-                else if (user.UserName != null && user.Login != null && password == null && user.RoleId == 0)
-                {
-                    services.Success = false;
-                    services.Message = "Введите данные";
-                }
-                else if (user.UserName != null && user.Login == null && password != null && user.RoleId == 0)
-                {
-                    services.Success = false;
-                    services.Message = "Введите данные";
-                }
-                else if (user.UserName != null && user.Login == null && password == null && user.RoleId != 0)
-                {
-                    services.Success = false;
-                    services.Message = "Введите данные";
-                }
-                else if (user.UserName == null && user.Login != null && password != null && user.RoleId == 0)
-                {
-                    services.Success = false;
-                    services.Message = "Введите данные";
-                }
-                else if (user.UserName == null && user.Login != null && password == null && user.RoleId != 0)
-                {
-                    services.Success = false;
-                    services.Message = "Введите данные";
-                }
-                else if (user.UserName == null && user.Login == null && password != null && user.RoleId != 0)
-                {
-                    services.Success = false;
-                    services.Message = "Введите данные";
-                }
-                else if (user.UserName != null && user.Login != null && password != null && user.RoleId == 0)
-                {
-                    services.Success = false;
-                    services.Message = "Введите данные";
-                }
-                //проверка на пустоту сток
-                else if (user.UserName != "" && user.Login == "" && password == "" && user.RoleId == 0)
-                {
-                    services.Success = false;
-                    services.Message = "Введите данные";
-                }
-                else if (user.UserName == "" && user.Login != "" && password == "" && user.RoleId == 0)
-                {
-                    services.Success = false;
-                    services.Message = "Введите данные";
-                }
-                else if (user.UserName == "" && user.Login == "" && password != "" && user.RoleId == 0)
-                {
-                    services.Success = false;
-                    services.Message = "Введите данные";
-                }
-                else if (user.UserName == "" && user.Login == "" && password == "" && user.RoleId != 0)
-                {
-                    services.Success = false;
-                    services.Message = "Введите данные";
-                }
-                else if (user.UserName != "" && user.Login != "" && password == "" && user.RoleId == 0)
-                {
-                    services.Success = false;
-                    services.Message = "Введите данные";
-                }
-                else if (user.UserName != "" && user.Login == "" && password != "" && user.RoleId == 0)
-                {
-                    services.Success = false;
-                    services.Message = "Введите данные";
-                }
-                else if (user.UserName != "" && user.Login == "" && password == "" && user.RoleId != 0)
-                {
-                    services.Success = false;
-                    services.Message = "Введите данные";
-                }
-                else if (user.UserName == "" && user.Login != "" && password != "" && user.RoleId == 0)
-                {
-                    services.Success = false;
-                    services.Message = "Введите данные";
-                }
-                else if (user.UserName == "" && user.Login != "" && password == "" && user.RoleId != 0)
-                {
-                    services.Success = false;
-                    services.Message = "Введите данные";
-                }
-                else if (user.UserName == "" && user.Login == "" && password != "" && user.RoleId != 0)
-                {
-                    services.Success = false;
-                    services.Message = "Введите данные";
-                }
-                else if (user.UserName != "" && user.Login != "" && password != "" && user.RoleId == 0)
-                {
-                    services.Success = false;
-                    services.Message = "Введите данные";
-                }
-                //добавление пользователя
-                else if (user.UserName != "" && user.Login != "" && password != "" && user.RoleId != 0)
-                {
                     CreatePasswordHash(password, out byte[] passHash, out byte[] passSalt);
                     user.PasswordSalt = passSalt;
                     user.PasswordHash = passHash;
@@ -208,7 +95,6 @@ namespace Cis_part2.Data
                     await db.SaveChangesAsync();
                     services.Data = "Вы успешно зарегистрированы";
                 }
-            }
             catch (Exception e)
             {
                 services.Success = false;
@@ -225,6 +111,31 @@ namespace Cis_part2.Data
                 return true;
             }
             return false;
+        }
+
+        private string CreateToken(User user)
+        {
+            List<Claim> claims = new List<Claim>()
+            {
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new Claim(ClaimTypes.Name, user.Login)
+            };
+            SymmetricSecurityKey key = new SymmetricSecurityKey(Encoding.UTF8
+                .GetBytes(_configuration.GetSection("AppSettings:Token").Value));
+
+            SigningCredentials creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
+
+            SecurityTokenDescriptor tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(claims),
+                Expires = DateTime.Now.AddDays(1),
+                SigningCredentials = creds
+            };
+
+            JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
+            SecurityToken token = tokenHandler.CreateToken(tokenDescriptor);
+
+            return tokenHandler.WriteToken(token);
         }
     }
 }

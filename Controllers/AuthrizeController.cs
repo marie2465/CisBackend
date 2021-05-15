@@ -19,7 +19,7 @@ namespace Cis_part2.Controllers
         public async Task<IActionResult> AddUser(UserRegisterDto userRegisterDto)
         {
             ServicesResponse<string> response = await _authRepository.Register(
-                new User { UserName = userRegisterDto.UserName, Login = userRegisterDto.Login, RoleId = userRegisterDto.RoleId }, userRegisterDto.Password
+                new User { UserName = userRegisterDto.UserName, Login = userRegisterDto.Login, RolesId = userRegisterDto.RolesId }, userRegisterDto.Password
             );
             return Ok(response);
         }

@@ -7,7 +7,7 @@ namespace Cis_part2.Models
         public string Login { get; set; }
         public byte[]PasswordSalt { get; set; }
         public byte[]PasswordHash { get; set; }
-        public int RoleId { get; set; }
+        public int? RolesId { get; set; }
         public Roles Roles { get; set; }
     }
 }

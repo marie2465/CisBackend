@@ -7,6 +7,8 @@ namespace Cis_part2.Data
     {
         public CisDBContext(DbContextOptions<CisDBContext> options) : base(options) { }
         public DbSet<Roles> Roles { get; set; }
+        public DbSet<Skills> Skills { get; set; }
+        public DbSet<TypeSkills> TypeSkills { get; set; }
         public DbSet<User> Users { get; set; }
     }
 }

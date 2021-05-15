@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Cis_part2.Models
 {
     public class Roles
