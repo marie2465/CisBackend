@@ -4,14 +4,16 @@ using Cis_part2.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Cis_part2.Migrations
 {
     [DbContext(typeof(CisDBContext))]
-    partial class CisDBContextModelSnapshot : ModelSnapshot
+    [Migration("20210515192433_SkillsRelation")]
+    partial class SkillsRelation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -47,10 +49,10 @@ namespace Cis_part2.Migrations
                     b.Property<string>("NameSkills")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TypeSkillsId")
+                    b.Property<int?>("TypeSkillsId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserId")
+                    b.Property<int?>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -93,7 +95,7 @@ namespace Cis_part2.Migrations
                     b.Property<byte[]>("PasswordSalt")
                         .HasColumnType("varbinary(max)");
 
-                    b.Property<int>("RolesId")
+                    b.Property<int?>("RolesId")
                         .HasColumnType("int");
 
                     b.Property<string>("UserName")
@@ -110,15 +112,11 @@ namespace Cis_part2.Migrations
                 {
                     b.HasOne("Cis_part2.Models.TypeSkills", "TypeSkills")
                         .WithMany()
-                        .HasForeignKey("TypeSkillsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("TypeSkillsId");
 
                     b.HasOne("Cis_part2.Models.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
 
                     b.Navigation("TypeSkills");
 
@@ -129,9 +127,7 @@ namespace Cis_part2.Migrations
                 {
                     b.HasOne("Cis_part2.Models.Roles", "Roles")
                         .WithMany()
-                        .HasForeignKey("RolesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("RolesId");
 
                     b.Navigation("Roles");
                 });
