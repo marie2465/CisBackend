@@ -81,7 +81,7 @@ namespace Cis_part2.Services.SkillsServices
             services.Data = _mapper.Map<GetSkillsDto>(skills);
             return services;
         }
-
+        //update
         public async Task<ServicesResponse<GetSkillsDto>> UpdateSkills(int id, UpdateSkillsDto updateSkills)
         {
             ServicesResponse<GetSkillsDto> services = new ServicesResponse<GetSkillsDto>();
@@ -90,7 +90,6 @@ namespace Cis_part2.Services.SkillsServices
             skillUpdate.Id = id;
             if (updateSkills.NameSkills != "" && updateSkills.CodeSkills == null) skillUpdate.NameSkills = updateSkills.NameSkills;
             if (updateSkills.CodeSkills != "" && updateSkills.NameSkills == null) skillUpdate.CodeSkills = updateSkills.CodeSkills;
-            // if (updateSkills.TypeSkillsId != 0) skillUpdate.TypeSkillsId = updateSkills.TypeSkillsId;
             skillUpdate.NameSkills = updateSkills.NameSkills;
             skillUpdate.CodeSkills = updateSkills.CodeSkills;
             db.Skills.Update(skillUpdate);
