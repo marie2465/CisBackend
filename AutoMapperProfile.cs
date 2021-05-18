@@ -1,4 +1,5 @@
 using AutoMapper;
+using Cis_part2.Dtos.Section;
 using Cis_part2.Dtos.Skills;
 using Cis_part2.Models;
 
@@ -12,6 +13,10 @@ namespace Cis_part2
             CreateMap<Skills, GetSkillsDto>();
             CreateMap<AddSkillsDto, Skills>();
             CreateMap<UpdateSkillsDto, Skills>();
+            //section
+            CreateMap<Sections, GetSectionDto>();
+            CreateMap<AddSectionDto, Sections>();
+            CreateMap<UpdateSectionDto, Sections>();
         }
     }
 }
