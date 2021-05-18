@@ -83,18 +83,18 @@ namespace Cis_part2.Data
             ServicesResponse<string> services = new ServicesResponse<string>();
             try
             {
-                if(user ==null)
+                if (user == null)
                 {
                     services.Success = false;
                     services.Message = "Введите данные";
                 }
-                    CreatePasswordHash(password, out byte[] passHash, out byte[] passSalt);
-                    user.PasswordSalt = passSalt;
-                    user.PasswordHash = passHash;
-                    await db.Users.AddAsync(user);
-                    await db.SaveChangesAsync();
-                    services.Data = "Вы успешно зарегистрированы";
-                }
+                CreatePasswordHash(password, out byte[] passHash, out byte[] passSalt);
+                user.PasswordSalt = passSalt;
+                user.PasswordHash = passHash;
+                await db.Users.AddAsync(user);
+                await db.SaveChangesAsync();
+                services.Data = "Вы успешно зарегистрированы";
+            }
             catch (Exception e)
             {
                 services.Success = false;

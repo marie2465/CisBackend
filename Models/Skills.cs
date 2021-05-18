@@ -5,7 +5,9 @@ namespace Cis_part2.Models
         public int Id { get; set; }
         public string CodeSkills { get; set; }
         public string NameSkills { get; set; }
-        public int? TypeSkillsId { get; set; }
+        public int TypeSkillsId { get; set; }
         public TypeSkills TypeSkills { get; set; }
+        public int UserId { get; set; }
+        public User User { get; set; }
     }
 }

@@ -10,7 +10,7 @@ namespace Cis_part2.Services.SkillsServices
         public Task<ServicesResponse<List<GetSkillsDto>>> GetAll();
         public Task<ServicesResponse<GetSkillsDto>> GetSkillsById(int id);
         public Task<ServicesResponse<GetSkillsDto>> AddSkills(AddSkillsDto addSkillsDto);
-        public Task<ServicesResponse<GetSkillsDto>> UpdateSkills(UpdateSkillsDto updateSkills);
+        public Task<ServicesResponse<GetSkillsDto>> UpdateSkills(int id, UpdateSkillsDto updateSkills);
         public Task<ServicesResponse<List<GetSkillsDto>>> DeleteSkills (int id);
     }
 }
