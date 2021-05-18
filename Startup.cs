@@ -2,10 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Cis_part2.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -26,12 +28,23 @@ namespace Cis_part2
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            string dbHost = Configuration["DB_HOST"] ?? "wpl42.hosting.reg.ru";
+            string dbPort = Configuration["DB_PORT"] ?? "1433";
+            string dbName = Configuration["DB_NAME"] ?? "u1374662_Cis";
+            string dbUser = Configuration["DB_USER"] ?? "u1374662_mary";
+            string dbPassword = Configuration["DB_PASSwORD"] ?? "q!1w2e3Infinity_87";
+            services.AddDbContext<CisDBContext>(options =>
+            {
+                options.UseSqlServer(
+                    $"Server = {dbHost},{dbPort}; Initial Catalog = {dbName}; User Id = {dbUser}; Password = {dbPassword}");
+            });
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Cis_part2", Version = "v1" });
             });
+            services.AddAutoMapper(typeof(Startup));
+            services.AddScoped<IAuthRepository, AuthRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
