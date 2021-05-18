@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Cis_part2.Models
 {
     public class Skills
@@ -9,5 +11,6 @@ namespace Cis_part2.Models
         public TypeSkills TypeSkills { get; set; }
         public int UserId { get; set; }
         public User User { get; set; }
+        public List<Sections> Sections { get; set; }
     }
 }
