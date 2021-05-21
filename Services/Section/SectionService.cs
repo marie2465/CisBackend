@@ -82,13 +82,13 @@ namespace Cis_part2.Services.Section
             {
                 var skills = await db.Skills.FirstOrDefaultAsync(c => c.Id == skillId);
                 if (skills == null) throw new Exception("Not found");
+                
                 var idMax = db.Sections.Max(c => c.Id);
                 int idMin = db.Sections.Min(c => c.Id);
                 if (idMin > id || id > idMax) services.Message = "Данной записи нет";
+
                 var sections = await db.Sections.FirstOrDefaultAsync(c => c.Id == id);
-                if (updateSectionDto.NameSection != "") sections.NameSection = updateSectionDto.NameSection;
-                if (updateSectionDto.Importance != 0) sections.Importance = updateSectionDto.Importance;
-                sections.SkillsId = skillId;
+                _mapper.Map(updateSectionDto, sections);
                 db.Sections.Update(sections);
                 await db.SaveChangesAsync();
                 services.Data = _mapper.Map<GetSectionDto>(sections);

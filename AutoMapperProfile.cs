@@ -1,4 +1,5 @@
 using AutoMapper;
+using Cis_part2.Dtos.Asspect;
 using Cis_part2.Dtos.Section;
 using Cis_part2.Dtos.Skills;
 using Cis_part2.Models;
@@ -17,6 +18,10 @@ namespace Cis_part2
             CreateMap<Sections, GetSectionDto>();
             CreateMap<AddSectionDto, Sections>();
             CreateMap<UpdateSectionDto, Sections>();
+            //asspect
+            CreateMap<Asspects, GetAsspectDto>();
+            CreateMap<AddAsspectDto,Asspects>();
+            CreateMap<UpdateAsspectDto, Asspects>();
         }
     }
 }

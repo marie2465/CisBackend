@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Cis_part2.Data;
+using Cis_part2.Services.Asspect;
 using Cis_part2.Services.Section;
 using Cis_part2.Services.SkillsServices;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -64,6 +65,7 @@ namespace Cis_part2
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<ISkillsServices, SkillsServices>();
             services.AddScoped<ISectionService, SectionService>();
+            services.AddScoped<IAsspectService, AsspectService>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
 
