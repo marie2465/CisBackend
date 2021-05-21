@@ -19,10 +19,10 @@ namespace Cis_part2.Services.Asspect
             db = dBContext;
             _mapper = mapper;
         }
-        public async Task<ServicesResponse<GetAsspectDto>> AddAsspect(int sectionsId, AddAsspectDto addAsspect)
+        public async Task<ServicesResponse<GetAsspectDto>> AddAsspect(int sectionId, AddAsspectDto addAsspect)
         {
             ServicesResponse<GetAsspectDto> services = new ServicesResponse<GetAsspectDto>();
-            var section = await db.Sections.FirstOrDefaultAsync(c => c.Id == sectionsId);
+            var section = await db.Sections.FirstOrDefaultAsync(c => c.Id == sectionId);
             if (section == null) throw new Exception();
 
             var asspect = _mapper.Map<AddAsspectDto, Asspects>(addAsspect);
@@ -32,10 +32,10 @@ namespace Cis_part2.Services.Asspect
             return services;
         }
 
-        public async Task<ServicesResponse<List<GetAsspectDto>>> DeleteAsspect(int sectionsId, int id)
+        public async Task<ServicesResponse<List<GetAsspectDto>>> DeleteAsspect(int sectionId, int id)
         {
             ServicesResponse<List<GetAsspectDto>> services = new ServicesResponse<List<GetAsspectDto>>();
-            var section = await db.Sections.FirstOrDefaultAsync(c => c.Id == sectionsId);
+            var section = await db.Sections.FirstOrDefaultAsync(c => c.Id == sectionId);
             if (section == null) throw new Exception();
 
             var asspect = await db.Asspects.FirstOrDefaultAsync(a => a.Id == id);
@@ -46,20 +46,20 @@ namespace Cis_part2.Services.Asspect
             return services;
         }
 
-        public async Task<ServicesResponse<List<GetAsspectDto>>> GetAll(int sectionsId)
+        public async Task<ServicesResponse<List<GetAsspectDto>>> GetAll(int sectionId)
         {
             ServicesResponse<List<GetAsspectDto>> services = new ServicesResponse<List<GetAsspectDto>>();
-            var section = await db.Sections.FirstOrDefaultAsync(c => c.Id == sectionsId);
+            var section = await db.Sections.FirstOrDefaultAsync(c => c.Id == sectionId);
             if (section == null) throw new Exception();
 
             services.Data = db.Asspects.Select(c => _mapper.Map<GetAsspectDto>(c)).ToList();
             return services;
         }
 
-        public async Task<ServicesResponse<GetAsspectDto>> GetById(int sectionsId, int id)
+        public async Task<ServicesResponse<GetAsspectDto>> GetById(int sectionId, int id)
         {
             ServicesResponse<GetAsspectDto> services = new ServicesResponse<GetAsspectDto>();
-            var section = await db.Sections.FirstOrDefaultAsync(c => c.Id == sectionsId);
+            var section = await db.Sections.FirstOrDefaultAsync(c => c.Id == sectionId);
             if (section == null) throw new Exception();
 
             var asspect = await db.Asspects.FirstOrDefaultAsync(a => a.Id == id);
@@ -68,10 +68,10 @@ namespace Cis_part2.Services.Asspect
             return services;
         }
 
-        public async Task<ServicesResponse<GetAsspectDto>> UpdateAsspect(int sectionsId, int id, UpdateAsspectDto updateAsspectDto)
+        public async Task<ServicesResponse<GetAsspectDto>> UpdateAsspect(int sectionId, int id, UpdateAsspectDto updateAsspectDto)
         {
             ServicesResponse<GetAsspectDto> services = new ServicesResponse<GetAsspectDto>();
-            var section = await db.Sections.FirstOrDefaultAsync(c => c.Id == sectionsId);
+            var section = await db.Sections.FirstOrDefaultAsync(c => c.Id == sectionId);
             if (section == null) throw new Exception();
 
             var asspect = await db.Asspects.FirstOrDefaultAsync(c => c.Id == id);
