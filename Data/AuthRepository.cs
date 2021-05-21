@@ -15,7 +15,6 @@ namespace Cis_part2.Data
 {
     public class AuthRepository : IAuthRepository
     {
-        string passSalts;
         private readonly IConfiguration _configuration;
         private readonly CisDBContext db;
         private readonly IMapper _mapper;

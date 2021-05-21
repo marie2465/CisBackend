@@ -4,14 +4,16 @@ using Cis_part2.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Cis_part2.Migrations
 {
     [DbContext(typeof(CisDBContext))]
-    partial class CisDBContextModelSnapshot : ModelSnapshot
+    [Migration("20210518173037_Section")]
+    partial class Section
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -47,12 +49,7 @@ namespace Cis_part2.Migrations
                     b.Property<string>("NameSection")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("SkillsId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("SkillsId");
 
                     b.ToTable("Sections");
                 });
@@ -129,17 +126,6 @@ namespace Cis_part2.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("Cis_part2.Models.Sections", b =>
-                {
-                    b.HasOne("Cis_part2.Models.Skills", "Skills")
-                        .WithMany("Sections")
-                        .HasForeignKey("SkillsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Skills");
-                });
-
             modelBuilder.Entity("Cis_part2.Models.Skills", b =>
                 {
                     b.HasOne("Cis_part2.Models.TypeSkills", "TypeSkills")
@@ -168,11 +154,6 @@ namespace Cis_part2.Migrations
                         .IsRequired();
 
                     b.Navigation("Roles");
-                });
-
-            modelBuilder.Entity("Cis_part2.Models.Skills", b =>
-                {
-                    b.Navigation("Sections");
                 });
 #pragma warning restore 612, 618
         }

@@ -16,8 +16,6 @@ namespace Cis_part2.Controllers
     [Route("[controller]")]
     public class SkillController : ControllerBase
     {
-        public static ClaimsPrincipal User { get; }
-       
         private readonly ISkillsServices _skillsService;
         public SkillController(ISkillsServices skillsServices)
         {
