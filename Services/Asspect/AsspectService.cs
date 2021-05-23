@@ -26,6 +26,7 @@ namespace Cis_part2.Services.Asspect
             if (section == null) throw new Exception();
 
             var asspect = _mapper.Map<AddAsspectDto, Asspects>(addAsspect);
+            asspect.SectionsId = section.Id;
             await db.Asspects.AddAsync(asspect);
             await db.SaveChangesAsync();
             services.Data = _mapper.Map<GetAsspectDto>(asspect);

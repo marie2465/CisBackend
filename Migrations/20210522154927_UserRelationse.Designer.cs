@@ -4,14 +4,16 @@ using Cis_part2.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Cis_part2.Migrations
 {
     [DbContext(typeof(CisDBContext))]
-    partial class CisDBContextModelSnapshot : ModelSnapshot
+    [Migration("20210522154927_UserRelationse")]
+    partial class UserRelationse
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -148,7 +150,7 @@ namespace Cis_part2.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("DatesId")
+                    b.Property<int>("DatesId")
                         .HasColumnType("int");
 
                     b.Property<string>("Login")
@@ -218,9 +220,11 @@ namespace Cis_part2.Migrations
 
             modelBuilder.Entity("Cis_part2.Models.User", b =>
                 {
-                    b.HasOne("Cis_part2.Models.Dates", null)
-                        .WithMany("User")
-                        .HasForeignKey("DatesId");
+                    b.HasOne("Cis_part2.Models.Dates", "Dates")
+                        .WithMany()
+                        .HasForeignKey("DatesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Cis_part2.Models.Roles", "Roles")
                         .WithMany()
@@ -228,12 +232,9 @@ namespace Cis_part2.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Roles");
-                });
+                    b.Navigation("Dates");
 
-            modelBuilder.Entity("Cis_part2.Models.Dates", b =>
-                {
-                    b.Navigation("User");
+                    b.Navigation("Roles");
                 });
 
             modelBuilder.Entity("Cis_part2.Models.Sections", b =>

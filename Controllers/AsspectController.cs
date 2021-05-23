@@ -8,7 +8,7 @@ namespace Cis_part2.Controllers
 {
     [Authorize]
     [ApiController]
-    [Route("[contoller]")]
+    [Route("[controller]")]
     public class AsspectController : ControllerBase
     {
         private readonly IAsspectService _asspectService;
