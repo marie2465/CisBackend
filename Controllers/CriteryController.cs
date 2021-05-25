@@ -8,6 +8,7 @@ namespace Cis_part2.Controllers
 {
     [Authorize]
     [ApiController]
+    [Route("[controller]")]
     public class CriteryController : ControllerBase
     {
         private readonly ICriteryService _criteryService;
@@ -30,7 +31,7 @@ namespace Cis_part2.Controllers
         {
             return Ok(await _criteryService.Add(skillsId, addCriteries));
         }
-        [HttpGet("skills/{skillsId}/{id}")]
+        [HttpPut("skills/{skillsId}/{id}")]
         public async Task<IActionResult> Update(int skillsId, int id, UpdateCriteriesDto updateCriteries)
         {
             return Ok(await _criteryService.UpdateCriteries(skillsId, id, updateCriteries));

@@ -26,6 +26,7 @@ namespace Cis_part2.Services.Critery
             if (skills == null) throw new Exception("Not Found");
 
             var critery = _mapper.Map<AddCriteriesDto, Criteries>(addCriteriesDto);
+            critery.SkillsId = skills.Id;
             await db.Criteries.AddAsync(critery);
             await db.SaveChangesAsync();
             services.Data = _mapper.Map<GetCriteriesDto>(critery);
@@ -50,6 +51,7 @@ namespace Cis_part2.Services.Critery
             ServicesResponse<List<GetCriteriesDto>> services = new ServicesResponse<List<GetCriteriesDto>>();
             var skills = await db.Skills.FirstOrDefaultAsync(c => c.Id == skillsId);
             if (skills == null) throw new Exception("Not Found");
+
             services.Data = await (db.Criteries.Select(c => _mapper.Map<GetCriteriesDto>(c))).ToListAsync();
             return services;
         }
@@ -72,9 +74,7 @@ namespace Cis_part2.Services.Critery
             if (skills == null) throw new Exception("Not Found");
 
             var critery = await db.Criteries.FirstOrDefaultAsync(a => a.Id == id);
-            if (updateCriteriesDto.Letter != "") critery.Letter = updateCriteriesDto.Letter;
-            if (updateCriteriesDto.Mark != 0) critery.Mark = updateCriteriesDto.Mark;
-            if (updateCriteriesDto.Name != "") critery.Name = updateCriteriesDto.Name;
+            _mapper.Map(updateCriteriesDto, critery);
             db.Criteries.Update(critery);
             await db.SaveChangesAsync();
             services.Data = _mapper.Map<GetCriteriesDto>(critery);
