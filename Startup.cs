@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Cis_part2.Data;
+using Cis_part2.Services.Asspects;
 using Cis_part2.Services.Critery;
 using Cis_part2.Services.Section;
 using Cis_part2.Services.SkillsServices;
@@ -67,6 +68,7 @@ namespace Cis_part2
             services.AddScoped<ISkillsServices, SkillsServices>();
             services.AddScoped<ISectionService, SectionService>();
             services.AddScoped<ICriteryService, CriteryService>();
+            services.AddScoped<IAsspectService, AsspectService>();
             services.AddScoped<ISubCriteriesService, SubCriteriesService>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
