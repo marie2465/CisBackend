@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ZphWRpLPFTAbV7iTnPmiLUpZRWspWiOd6R5OzUJ0cny3hzZ+UKxdifN2I4HWDbnVLdVKe0DSiIROuzApHKQ8hA==",
+  "dgSpecHash": "hIMUZaKEBNBEhm/21okOE3xGwJTXCLajsURXZcxUlzy5m3fclgzeu6GvI0SembwK2scBhCDzSzaSlZ5waqsD/A==",
   "success": true,
-  "projectFilePath": "C:\\Users\\marie\\Desktop\\Файлы\\!!!!Диплом (Важная)\\Cis part2\\Cis part2.csproj",
+  "projectFilePath": "C:\\Users\\marie\\Desktop\\Файлы\\Project VSCode\\Cis_part2\\Cis part2.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\marie\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
     "C:\\Users\\marie\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\8.1.1\\automapper.extensions.microsoft.dependencyinjection.8.1.1.nupkg.sha512",
