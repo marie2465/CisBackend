@@ -2,6 +2,7 @@ using AutoMapper;
 using Cis_part2.Dtos.Criteries;
 using Cis_part2.Dtos.Section;
 using Cis_part2.Dtos.Skills;
+using Cis_part2.Dtos.SubCritery;
 using Cis_part2.Models;
 
 namespace Cis_part2
@@ -22,6 +23,10 @@ namespace Cis_part2
             CreateMap<Criteries, GetCriteriesDto>();
             CreateMap<AddCriteriesDto, Criteries>();
             CreateMap<UpdateCriteriesDto, Criteries>();
+            //sub critery
+            CreateMap<SubCriteries, GetSubCriteriesDto>();
+            CreateMap<AddSubCriteriesDto, SubCriteries>();
+            CreateMap<UpdateCriteriesDto, SubCriteries>();
         }
     }
 }

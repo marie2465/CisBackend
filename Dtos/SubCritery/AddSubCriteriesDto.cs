@@ -1,6 +1,6 @@
 namespace Cis_part2.Dtos.SubCritery
 {
-    public class AddSubCriteries
+    public class AddSubCriteriesDto
     {
         public string Letter { get; set; }
         public string Name { get; set; }
