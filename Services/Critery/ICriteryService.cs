@@ -7,10 +7,10 @@ namespace Cis_part2.Services.Critery
 {
     public interface ICriteryService
     {
-         public Task<ServicesResponse<List<GetCriteriesDto>>> GetAll(int skillsId);
-         public Task<ServicesResponse<GetCriteriesDto>> GetById(int skillsId, int id);
-         public Task<ServicesResponse<GetCriteriesDto>> Add(int skillsId, AddCriteriesDto addCriteriesDto);
-         public Task<ServicesResponse<GetCriteriesDto>> UpdateCriteries (int skillsId, int id, UpdateCriteriesDto updateCriteriesDto);
-         public Task<ServicesResponse<List<GetCriteriesDto>>> DeleteCriteries(int skillsId, int id);
+        public Task<ServicesResponse<List<GetCriteriesDto>>> GetAll(int skillsId);
+        public Task<ServicesResponse<GetCriteriesDto>> GetById(int skillsId, int id);
+        public Task<ServicesResponse<GetCriteriesDto>> Add(int skillsId, AddCriteriesDto addCriteriesDto);
+        public Task<ServicesResponse<GetCriteriesDto>> UpdateCriteries(int skillsId, int id, UpdateCriteriesDto updateCriteriesDto);
+        public Task<ServicesResponse<List<GetCriteriesDto>>> DeleteCriteries(int skillsId, int id);
     }
 }

@@ -56,7 +56,7 @@ namespace Cis_part2.Services.Critery
 
         public async Task<ServicesResponse<GetCriteriesDto>> GetById(int skillsId, int id)
         {
-            ServicesResponse<GetCriteriesDto> services = new ServicesResponse<GetCriteriesDto>(); 
+            ServicesResponse<GetCriteriesDto> services = new ServicesResponse<GetCriteriesDto>();
             var skills = await db.Skills.FirstOrDefaultAsync(c => c.Id == skillsId);
             if (skills == null) throw new Exception("Not Found");
 
@@ -67,14 +67,14 @@ namespace Cis_part2.Services.Critery
 
         public async Task<ServicesResponse<GetCriteriesDto>> UpdateCriteries(int skillsId, int id, UpdateCriteriesDto updateCriteriesDto)
         {
-            ServicesResponse<GetCriteriesDto> services = new ServicesResponse<GetCriteriesDto>(); 
+            ServicesResponse<GetCriteriesDto> services = new ServicesResponse<GetCriteriesDto>();
             var skills = await db.Skills.FirstOrDefaultAsync(c => c.Id == skillsId);
             if (skills == null) throw new Exception("Not Found");
 
             var critery = await db.Criteries.FirstOrDefaultAsync(a => a.Id == id);
-            if(updateCriteriesDto.Letter!="") critery.Letter = updateCriteriesDto.Letter;
-            if(updateCriteriesDto.Mark!=0) critery.Mark = updateCriteriesDto.Mark;
-            if(updateCriteriesDto.Name !="") critery.Name = updateCriteriesDto.Name;
+            if (updateCriteriesDto.Letter != "") critery.Letter = updateCriteriesDto.Letter;
+            if (updateCriteriesDto.Mark != 0) critery.Mark = updateCriteriesDto.Mark;
+            if (updateCriteriesDto.Name != "") critery.Name = updateCriteriesDto.Name;
             db.Criteries.Update(critery);
             await db.SaveChangesAsync();
             services.Data = _mapper.Map<GetCriteriesDto>(critery);
