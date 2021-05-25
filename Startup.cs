@@ -7,6 +7,7 @@ using Cis_part2.Data;
 using Cis_part2.Services.Critery;
 using Cis_part2.Services.Section;
 using Cis_part2.Services.SkillsServices;
+using Cis_part2.Services.SubCritery;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -66,6 +67,7 @@ namespace Cis_part2
             services.AddScoped<ISkillsServices, SkillsServices>();
             services.AddScoped<ISectionService, SectionService>();
             services.AddScoped<ICriteryService, CriteryService>();
+            services.AddScoped<ISubCriteriesService, SubCriteriesService>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
 
