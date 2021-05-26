@@ -1,12 +1,14 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace Cis_part2.Dtos.Persons
 {
     public class AddPersonDto
     {
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Gender { get; set; }
-        public int? MemberId { get; set; }
-        public int? SkillsID { get; set; }
-        public int? RolesId { get; set; }
+        [Required] public string FirstName { get; set; }
+        [Required] public string LastName { get; set; }
+        [Required] public string Gender { get; set; }
+        [Required] public int? MemberId { get; set; }
+        [Required] public int? SkillsID { get; set; }
+        [Required] public int? RolesId { get; set; }
     }
 }
