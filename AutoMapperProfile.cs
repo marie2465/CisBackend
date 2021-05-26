@@ -1,11 +1,13 @@
 using AutoMapper;
 using Cis_part2.Dtos.Asspects;
 using Cis_part2.Dtos.Criteries;
+using Cis_part2.Dtos.PeopleInTeams;
 using Cis_part2.Dtos.Persons;
 using Cis_part2.Dtos.Scores;
 using Cis_part2.Dtos.Section;
 using Cis_part2.Dtos.Skills;
 using Cis_part2.Dtos.SubCritery;
+using Cis_part2.Dtos.Teams;
 using Cis_part2.Models;
 
 namespace Cis_part2
@@ -42,6 +44,13 @@ namespace Cis_part2
             CreateMap<Person, GetPersonDto>();
             CreateMap<AddPersonDto, Person>();
             CreateMap<UpdatePersonDto, Person>();
+            //teams
+            CreateMap<Teams, GetTeamsDto>();
+            CreateMap<AddTeamsDto, Teams>();
+            CreateMap<UpdateTeamsDto, Teams>();
+            //people in team
+            CreateMap<PeopleInTeams, GetPeopleTeamDto>();
+            CreateMap<AddPeopleTeamDto, PeopleInTeams>();
         }
     }
 }
