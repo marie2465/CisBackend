@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 using Cis_part2.Data;
 using Cis_part2.Services.Asspects;
 using Cis_part2.Services.Critery;
+using Cis_part2.Services.PeopleInTeam;
 using Cis_part2.Services.Persons;
 using Cis_part2.Services.Scores;
 using Cis_part2.Services.Section;
 using Cis_part2.Services.SkillsServices;
 using Cis_part2.Services.SubCritery;
+using Cis_part2.Services.Team;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -74,6 +76,8 @@ namespace Cis_part2
             services.AddScoped<ISubCriteriesService, SubCriteriesService>();
             services.AddScoped<IScoreService, ScoreService>();
             services.AddScoped<IPersonService, PersonService>();
+            services.AddScoped<ITeamsService, TeamService>();
+            services.AddScoped<IPeopleTeamService, PeopleTeamService>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
 
