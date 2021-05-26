@@ -4,53 +4,22 @@ using Cis_part2.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Cis_part2.Migrations
 {
     [DbContext(typeof(CisDBContext))]
-    partial class CisDBContextModelSnapshot : ModelSnapshot
+    [Migration("20210525200306_SubcriteryNotNull")]
+    partial class SubcriteryNotNull
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.5")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("Cis_part2.Models.Asspect", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("Mark")
-                        .HasColumnType("float");
-
-                    b.Property<int?>("SectionsId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("SubCriteriesId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("TypeAsspectId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("SectionsId");
-
-                    b.HasIndex("SubCriteriesId");
-
-                    b.HasIndex("TypeAsspectId");
-
-                    b.ToTable("Asspect");
-                });
 
             modelBuilder.Entity("Cis_part2.Models.Criteries", b =>
                 {
@@ -172,24 +141,6 @@ namespace Cis_part2.Migrations
                     b.ToTable("SubCriteries");
                 });
 
-            modelBuilder.Entity("Cis_part2.Models.TypeAsspect", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("TypeAsspect");
-                });
-
             modelBuilder.Entity("Cis_part2.Models.TypeSkills", b =>
                 {
                     b.Property<int>("Id")
@@ -232,27 +183,6 @@ namespace Cis_part2.Migrations
                     b.HasIndex("RolesId");
 
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("Cis_part2.Models.Asspect", b =>
-                {
-                    b.HasOne("Cis_part2.Models.Sections", "Sections")
-                        .WithMany()
-                        .HasForeignKey("SectionsId");
-
-                    b.HasOne("Cis_part2.Models.SubCriteries", "SubCriteries")
-                        .WithMany()
-                        .HasForeignKey("SubCriteriesId");
-
-                    b.HasOne("Cis_part2.Models.TypeAsspect", "TypeAsspect")
-                        .WithMany()
-                        .HasForeignKey("TypeAsspectId");
-
-                    b.Navigation("Sections");
-
-                    b.Navigation("SubCriteries");
-
-                    b.Navigation("TypeAsspect");
                 });
 
             modelBuilder.Entity("Cis_part2.Models.Criteries", b =>
