@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Cis_part2.Data;
 using Cis_part2.Services.Asspects;
 using Cis_part2.Services.Critery;
+using Cis_part2.Services.Persons;
+using Cis_part2.Services.Scores;
 using Cis_part2.Services.Section;
 using Cis_part2.Services.SkillsServices;
 using Cis_part2.Services.SubCritery;
@@ -70,6 +72,8 @@ namespace Cis_part2
             services.AddScoped<ICriteryService, CriteryService>();
             services.AddScoped<IAsspectService, AsspectService>();
             services.AddScoped<ISubCriteriesService, SubCriteriesService>();
+            services.AddScoped<IScoreService, ScoreService>();
+            services.AddScoped<IPersonService, PersonService>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
 
