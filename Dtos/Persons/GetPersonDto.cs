@@ -7,7 +7,7 @@ namespace Cis_part2.Dtos.Persons
         public string LastName { get; set; }
         public string Gender { get; set; }
         public int? MemberId { get; set; }
-        public int? SkillsID { get; set; }
+        public string SkillsID { get; set; }
         public int? RolesId { get; set; }
     }
 }
