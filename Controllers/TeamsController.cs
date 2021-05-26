@@ -31,7 +31,7 @@ namespace Cis_part2.Controllers
         {
             return Ok(await _teamsService.Add(addTeam));
         }
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             return Ok(await _teamsService.Delete(id));

@@ -8,6 +8,6 @@ namespace Cis_part2.Dtos.Teams
         public int Id { get; set; }
         public string Name { get; set; }
         public int SkillsId { get; set; }
-        List<GetPeopleTeamDto> PeopleInTeams { get; set; }
+        public List<GetPeopleTeamDto> PeopleInTeams { get; set; }
     }
 }
