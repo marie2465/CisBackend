@@ -4,14 +4,16 @@ using Cis_part2.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Cis_part2.Migrations
 {
     [DbContext(typeof(CisDBContext))]
-    partial class CisDBContextModelSnapshot : ModelSnapshot
+    [Migration("20210525231709_Score")]
+    partial class Score
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -76,57 +78,6 @@ namespace Cis_part2.Migrations
                     b.HasIndex("SkillsId");
 
                     b.ToTable("Criteries");
-                });
-
-            modelBuilder.Entity("Cis_part2.Models.Member", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Member");
-                });
-
-            modelBuilder.Entity("Cis_part2.Models.Person", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Gender")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("MemberId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("RolesId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("SkillsID")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("MemberId");
-
-                    b.HasIndex("RolesId");
-
-                    b.HasIndex("SkillsID");
-
-                    b.ToTable("Person");
                 });
 
             modelBuilder.Entity("Cis_part2.Models.Roles", b =>
@@ -332,31 +283,10 @@ namespace Cis_part2.Migrations
             modelBuilder.Entity("Cis_part2.Models.Criteries", b =>
                 {
                     b.HasOne("Cis_part2.Models.Skills", "Skills")
-                        .WithMany("Criteries")
+                        .WithMany()
                         .HasForeignKey("SkillsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Skills");
-                });
-
-            modelBuilder.Entity("Cis_part2.Models.Person", b =>
-                {
-                    b.HasOne("Cis_part2.Models.Member", "Member")
-                        .WithMany()
-                        .HasForeignKey("MemberId");
-
-                    b.HasOne("Cis_part2.Models.Roles", "Roles")
-                        .WithMany()
-                        .HasForeignKey("RolesId");
-
-                    b.HasOne("Cis_part2.Models.Skills", "Skills")
-                        .WithMany("Person")
-                        .HasForeignKey("SkillsID");
-
-                    b.Navigation("Member");
-
-                    b.Navigation("Roles");
 
                     b.Navigation("Skills");
                 });
@@ -426,10 +356,6 @@ namespace Cis_part2.Migrations
 
             modelBuilder.Entity("Cis_part2.Models.Skills", b =>
                 {
-                    b.Navigation("Criteries");
-
-                    b.Navigation("Person");
-
                     b.Navigation("Sections");
                 });
 #pragma warning restore 612, 618

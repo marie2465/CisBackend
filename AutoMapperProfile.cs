@@ -1,6 +1,8 @@
 using AutoMapper;
 using Cis_part2.Dtos.Asspects;
 using Cis_part2.Dtos.Criteries;
+using Cis_part2.Dtos.Persons;
+using Cis_part2.Dtos.Scores;
 using Cis_part2.Dtos.Section;
 using Cis_part2.Dtos.Skills;
 using Cis_part2.Dtos.SubCritery;
@@ -32,6 +34,14 @@ namespace Cis_part2
             CreateMap<Asspect, GetAsspectDto>();
             CreateMap<AddAsspectDto, Asspect>();
             CreateMap<UpdateAsspectDto, Asspect>();
+            //score
+            CreateMap<Score, GetScoreDto>();
+            CreateMap<AddScoreDto, Score>();
+            CreateMap<UpdateScoreDto, Score>();
+            //person
+            CreateMap<Person, GetPersonDto>();
+            CreateMap<AddPersonDto, Person>();
+            CreateMap<UpdatePersonDto, Person>();
         }
     }
 }

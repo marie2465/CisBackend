@@ -65,7 +65,10 @@ namespace Cis_part2.Services.SkillsServices
         public async Task<ServicesResponse<List<GetSkillsDto>>> GetAll()
         {
             ServicesResponse<List<GetSkillsDto>> services = new ServicesResponse<List<GetSkillsDto>>();
-            List<Skills> dbSkills = await db.Skills.Where(c => c.User.Id == GetUserId()).ToListAsync();
+            List<Skills> dbSkills = await (db.Skills.Where(c => c.User.Id == GetUserId())
+                                    .Include(c => c.Sections)
+                                    .Include(cs => cs.Criteries)
+                                    .Include(p => p.Person)).ToListAsync();
             services.Data = dbSkills.Select(c => _mapper.Map<GetSkillsDto>(c)).ToList();
             return services;
         }
@@ -76,8 +79,12 @@ namespace Cis_part2.Services.SkillsServices
             var idMax = db.Skills.Max(c => c.Id);
             int idMin = db.Skills.Min(c => c.Id);
             if (idMin > id || id > idMax) services.Message = "Данной записи нет";
-            Skills skills = await db.Skills.FirstOrDefaultAsync(c => c.Id == id);
+            Skills skills = await db.Skills.Include(c => c.Sections)
+                            .Include(cs => cs.Criteries)
+                            .Include(p => p.Person)
+                            .FirstOrDefaultAsync(c => c.Id == id);
             if (skills == null) services.Message = "Данной записи нет";
+            
             services.Data = _mapper.Map<GetSkillsDto>(skills);
             return services;
         }

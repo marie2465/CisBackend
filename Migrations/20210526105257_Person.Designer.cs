@@ -4,14 +4,16 @@ using Cis_part2.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Cis_part2.Migrations
 {
     [DbContext(typeof(CisDBContext))]
-    partial class CisDBContextModelSnapshot : ModelSnapshot
+    [Migration("20210526105257_Person")]
+    partial class Person
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -332,7 +334,7 @@ namespace Cis_part2.Migrations
             modelBuilder.Entity("Cis_part2.Models.Criteries", b =>
                 {
                     b.HasOne("Cis_part2.Models.Skills", "Skills")
-                        .WithMany("Criteries")
+                        .WithMany()
                         .HasForeignKey("SkillsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -351,7 +353,7 @@ namespace Cis_part2.Migrations
                         .HasForeignKey("RolesId");
 
                     b.HasOne("Cis_part2.Models.Skills", "Skills")
-                        .WithMany("Person")
+                        .WithMany()
                         .HasForeignKey("SkillsID");
 
                     b.Navigation("Member");
@@ -426,10 +428,6 @@ namespace Cis_part2.Migrations
 
             modelBuilder.Entity("Cis_part2.Models.Skills", b =>
                 {
-                    b.Navigation("Criteries");
-
-                    b.Navigation("Person");
-
                     b.Navigation("Sections");
                 });
 #pragma warning restore 612, 618

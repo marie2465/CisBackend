@@ -12,5 +12,7 @@ namespace Cis_part2.Models
         public int UserId { get; set; }
         public User User { get; set; }
         public List<Sections> Sections { get; set; }
+        public List<Criteries> Criteries { get; set; }
+        public List<Person> Person { get; set; }
     }
 }
