@@ -2,10 +2,12 @@ using System.Threading.Tasks;
 using Cis_part2.Data;
 using Cis_part2.Dtos.Users;
 using Cis_part2.Models;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Cis_part2.Controllers
 {
+    [DisableCors]
     [ApiController]
     [Route("[controller]")]
     public class AuthrizeController : ControllerBase

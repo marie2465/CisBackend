@@ -31,6 +31,7 @@ namespace Cis_part2
 {
     public class Startup
     {
+        string[] allowedOrigins = new string[] { "https://domain.com", "http://domain.com" };
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -55,6 +56,23 @@ namespace Cis_part2
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Cis_part2", Version = "v1" });
+            });
+            services.AddCors(corsOptions =>
+            {
+                corsOptions.AddPolicy(
+            name: "AllowLocalhost44321",
+           configurePolicy: policyBuilder => policyBuilder
+               .WithOrigins("https://localhost:5001")
+               .WithHeaders("accept", "content-type", "origin", "custom-header")
+               .AllowAnyMethod()
+               .AllowAnyHeader());
+
+                corsOptions.AddPolicy(
+                    name: "restrictive",
+                    configurePolicy: policyBuilder => policyBuilder
+                        .WithOrigins(allowedOrigins)
+                        .AllowAnyMethod()
+                        .AllowAnyHeader());
             });
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
             {
@@ -96,6 +114,8 @@ namespace Cis_part2
             app.UseRouting();
 
             app.UseAuthentication();
+
+            app.UseCors(builder => builder.AllowAnyOrigin());
 
             app.UseAuthorization();
 
